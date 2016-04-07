@@ -10,7 +10,7 @@ setup(
 	name='integrate',
 	version='1.0.0b1',
 	description='Test framework for integration tests with dependencies',
-	url='http://integrate.dunkelstern.de',
+	url='https://github.com/anfema/integrate',
 	author='Johannes Schriewer',
 	author_email='hallo@dunkelstern.de',
 	license='BSD',
