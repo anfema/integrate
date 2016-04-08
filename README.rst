@@ -121,9 +121,9 @@ The assertion API looks like the following, if there is a ``message`` parameter 
 - ``fail(message)``
   Just log an error message
 - ``raises(exception_type, function, *args, **kwargs)``
-  Check if a function raises a specified exception type, *args and **kwargs are forwarded to the function
+  Check if a function raises a specified exception type, args and kwargs are forwarded to the function
 - ``does_not_raise(function, *args, **kwargs)``
-  Check if a function does not raise an exception, *args and **kwargs are forwarded to the function
+  Check if a function does not raise an exception, args and kwargs are forwarded to the function
 
 Exceptions in test functions will still cancel the test function and log the exception to the error log if you don't wrap it with a ``raises()`` call. The traceback of an exception caught by the toplevel will be not of much use though if you can't pinpoint the location based on the exception type. If you just want to catch all exceptions use ``check.raises(Exception, myFunc, "myParam")``
 
@@ -136,7 +136,7 @@ For extending the ``Check`` class there is a, rather small, extension API:
 
 
 ``TestRunner`` class
-==================
+====================
 
 The ``TestRunner`` class is the entry point for automatically discovering tests in a project and running them. It has some initialization parameters:
 
