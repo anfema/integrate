@@ -140,9 +140,9 @@ For extending the ``Check`` class there is a, rather small, extension API:
 
 The ``TestRunner`` class is the entry point for automatically discovering tests in a project and running them. It has some initialization parameters:
 
-- ``verbosity`` verbosity of test output (min: 0, max: 2, default:2)
+- ``verbosity`` verbosity of test output (min: 0, max: 2, default: 2)
 - ``dirs`` list of directories to scan for tests, defaults to current directory. Directories are scanned recursively.
-- ``pattern`` file name pattern to search (argument to ``fnmatch``) defaults to the python best practice `*_test.py`
+- ``pattern`` file name pattern to search (argument to ``fnmatch``) defaults to the python best practice ``*_test.py``
 - ``checker`` the ``Check`` subclass to send to the tests, if you have subclassed the ``Check`` class put your class here, defaults to the unmodified ``Check`` class
 
 To start the tests instanciate the test runner and call the ``run()`` function::
