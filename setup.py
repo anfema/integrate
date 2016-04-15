@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name='integrate',
-	version='1.0.0b1',
+	version='1.0.0',
 	description='Test framework for integration tests with dependencies',
 	url='https://github.com/anfema/integrate',
 	author='Johannes Schriewer',
