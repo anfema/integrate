@@ -18,6 +18,7 @@ class Check(object):
         self.errors.append({
             'message': msg,
             'traceback': traceback.format_stack()[:-strip],
+            'detail': detail
         })
 
     def error_message(self):
@@ -28,35 +29,48 @@ class Check(object):
         "Check if two values are equal"
         if a != b:
             self.log_error("{} != {}".format(str(a), str(b)), message)
+            return False
+        return True
 
     def not_equal(self, a, b, message=None):
         "Check if two values are not equal"
         if a == b:
             self.log_error("{} == {}".format(str(a), str(b)), message)
+            return False
+        return True
 
     def is_none(self, a, message=None):
         "Check if a value is None"
         if a is not None:
             self.log_error("{} is not None".format(str(a)), message)
+            return False
+        return True
 
     def is_not_none(self, a, message=None):
         "Check if a value is not None"
         if a is None:
             self.log_error("{} is None".format(str(a)), message)
+            return False
+        return True
 
     def is_true(self, a, message=None):
         "Check if a value is True"
         if not a:
             self.log_error("{} is False".format(str(a)), message)
+            return False
+        return True
 
     def is_false(self, a, message=None):
         "Check if a value is False"
         if a:
             self.log_error("{} is True".format(str(a)), message)
+            return False
+        return True
 
     def fail(self, message):
         "Just log an error message"
         self.log_error(message, None)
+        return False
 
     def raises(self, exception_type, function, *args, **kwargs):
         """

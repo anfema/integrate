@@ -125,12 +125,14 @@ The assertion API looks like the following, if there is a ``message`` parameter 
 - ``does_not_raise(function, *args, **kwargs)``
   Check if a function does not raise an exception, args and kwargs are forwarded to the function
 
+All check functions should return ``True`` if the check succeeded and ``False`` if it failed if they don't have to return any other result (like the ``raises`` and ``does_not_raise`` functions which return the result of the function or ``None``)
+
 Exceptions in test functions will still cancel the test function and log the exception to the error log if you don't wrap it with a ``raises()`` call. The traceback of an exception caught by the toplevel will be not of much use though if you can't pinpoint the location based on the exception type. If you just want to catch all exceptions use ``check.raises(Exception, myFunc, "myParam")``
 
 For extending the ``Check`` class there is a, rather small, extension API:
 
-- ``log_error(error, message, strip=4)``
-  Use this function to add an error to the list, a corresponding stack trace is appended automatically. The ``error`` parameter is a textual description of the error, the ``message`` parameter is a user message. Only modify the ``strip`` parameter if your stacktrace gets entries after the error location in the test, by default it strips the last 4 stack frames as these are in the testing framework and just clobber the stack traces.
+- ``log_error(error, message, detail=None, strip=4)``
+  Use this function to add an error to the list, a corresponding stack trace is appended automatically. The ``error`` parameter is a textual one line description of the error, the ``message`` parameter is a user message. Use the ``detail`` parameter to give a detailed error description if needed. Only modify the ``strip`` parameter if your stacktrace gets entries after the error location in the test, by default it strips the last 4 stack frames as these are in the testing framework and just clobber the stack traces.
 - ``error_message()``
   Use this for debugging, this function joins all error messages into one string
 
