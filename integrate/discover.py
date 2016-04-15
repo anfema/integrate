@@ -76,3 +76,11 @@ class TestRunner(object):
             failed,
             skipped
         ))
+
+    def plan(self, only=None):
+        files = self._discover()
+        test_cases = self._import(files)
+        if only:
+            test_cases = [t for t in test_cases if ".".join([t.__module__, t.__name__]).startswith(only)]
+        for test in test_cases:
+            test(verbosity=self.verbosity, checker=self.checker).plan()
