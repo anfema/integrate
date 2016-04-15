@@ -1,3 +1,3 @@
-from .check import Check
-from .test import TestCase, test
-from .discover import TestRunner
+from .check import Check  # noqa
+from .test import TestCase, test  # noqa
+from .discover import TestRunner  # noqa
