@@ -106,7 +106,10 @@ class TestCase(object):
         if self.verbosity > 0:
             print("* Plan for test suite '{}'".format(self.__class__.__doc__))
             for name, func in tests:
-                print("  - {}".format(name))
+                if getattr(func, 'expect_fail', None):
+                    print("  - {}".format(name))
+                else:
+                    print("  - {} (expecting failure)".format(name))
 
         return [name for name, func in tests]
 
@@ -130,6 +133,7 @@ class TestCase(object):
 
         # run tests
         num_skipped = 0
+        num_exfail = 0
         for name, func in tests:
             self.results[name] = self.checker()
             print("  - Running {: <{len}}: ".format(
@@ -158,6 +162,10 @@ class TestCase(object):
                 num_skipped += 1
                 continue
 
+            # tests marked as 'expect_fail' log as expected failures
+            if getattr(func, 'expect_fail', None):
+                num_exfail += 1
+
             self.setup_test()
             try:
                 func(self.results[name])
@@ -169,12 +177,16 @@ class TestCase(object):
             if len(self.results[name].errors) == 0:
                 print("[  OK  ]", flush=True)
             else:
+                verb = "FAIL"
+                if getattr(func, 'expect_fail', None):
+                    verb = "EXFAIL"
                 if self.verbosity > 0:
-                    print("[ FAIL: {} ]".format(
+                    print("[ {}: {} ]".format(
+                        verb,
                         self.results[name].error_message()
                     ), flush=True)
                 else:
-                    print("[ FAIL ]", flush=True)
+                    print("[ {} ]".format(verb), flush=True)
 
         # log summary
         num_errors = 0
@@ -214,15 +226,16 @@ class TestCase(object):
                 num_errors += 1
 
         self.teardown_all()
-        print("Ran {} tests, {} succeeded, {} failed, {} skipped".format(
+        print("Ran {} tests, {} succeeded, {} failed ({} expected), {} skipped".format(
             len(tests),
             len(tests) - num_errors - num_skipped,
             num_errors,
+            num_exfail,
             num_skipped
         ))
         print()
 
-        return (len(tests), num_errors, num_skipped)
+        return (len(tests), num_errors, num_exfail, num_skipped)
 
     def setup_all(self):
         "This function is run at the beginning of the test case"

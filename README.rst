@@ -95,6 +95,7 @@ All functions that should be picked up by the ``TestCase`` class have to be deco
 - ``skip`` boolean, defaults to ``False``, set to ``True`` to skip a test
 - ``skip_if_failed`` list of strings, names of test functions that have to succeed (not fail or be skipped) in order for this function to run, defaults to an empty list
 - ``depends`` list of strings, names of test functions that should be run before this function, defaults to an empty list
+- ``expect_fail`` boolean, set to true if you expect this test to fail (just for logging purposes)
 
 The test functions have 2 parameters: ``self`` and ``check``, for the description of ``check`` read on.
 

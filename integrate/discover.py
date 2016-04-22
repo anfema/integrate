@@ -62,18 +62,21 @@ class TestRunner(object):
         tests = 0
         skipped = 0
         failed = 0
+        exfailed = 0
         if only:
             test_cases = [t for t in test_cases if ".".join([t.__module__, t.__name__]).startswith(only)]
         for test in test_cases:
-            num_tests, num_failed, num_skipped = test(verbosity=self.verbosity, checker=self.checker).run()
+            num_tests, num_failed, num_exfailed, num_skipped = test(verbosity=self.verbosity, checker=self.checker).run()
             tests += num_tests
             skipped += num_skipped
             failed += num_failed
+            exfailed += num_exfailed
 
-        print("Summary: Ran {} tests, {} succeeded, {} failed, {} skipped".format(
+        print("Summary: Ran {} tests, {} succeeded, {} failed ({} expected), {} skipped".format(
             tests,
             tests - skipped - failed,
             failed,
+            exfailed,
             skipped
         ))
 
