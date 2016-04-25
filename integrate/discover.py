@@ -15,9 +15,13 @@ def load_module(module_name, filename):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         return module
-    else:
+    elif sys.version_info >= (3, 3):
         from importlib.machinery import SourceFileLoader
-        return SourceFileLoader(module_name, filename).load_module()
+        loader = SourceFileLoader(module_name, filename)
+        module = loader.load_module()
+        return module
+    else:
+        raise Exception("What version of python are you running?")
 
 
 class TestRunner(object):
@@ -52,6 +56,8 @@ class TestRunner(object):
                 for name, cls in members:
                     if issubclass(cls, TestCase) and cls != TestCase:
                         test_cases.append(cls)
+            else:
+                print("load failed")
         return test_cases
 
     def run(self, only=None):
@@ -66,7 +72,10 @@ class TestRunner(object):
         if only:
             test_cases = [t for t in test_cases if ".".join([t.__module__, t.__name__]).startswith(only)]
         for test in test_cases:
-            num_tests, num_failed, num_exfailed, num_skipped = test(verbosity=self.verbosity, checker=self.checker).run()
+            num_tests, num_failed, num_exfailed, num_skipped = test(
+                verbosity=self.verbosity,
+                checker=self.checker
+            ).run()
             tests += num_tests
             skipped += num_skipped
             failed += num_failed

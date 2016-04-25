@@ -15,6 +15,6 @@
         "translate_tabs_to_spaces": true,
         "use_tab_stops": true,
         "src_root": "integrate",
-        "python_interpreter": "/Users/johannes/Python/djive/bin/python",
+        "python_interpreter": "~/Python/djive/bin/python",
     }
 }
