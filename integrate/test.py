@@ -1,4 +1,7 @@
+from __future__ import print_function
+
 import inspect
+import sys
 from functools import wraps
 from .check import Check
 
@@ -54,7 +57,7 @@ class TestCase(object):
     def __init__(self, verbosity=2, checker=Check):
         self.verbosity = verbosity
         self.checker = checker
-        super().__init__()
+        super(TestCase, self).__init__()
 
     def _solve_dependencies(self, tests):
         # build a dependency tree
@@ -139,7 +142,8 @@ class TestCase(object):
             print("  - Running {: <{len}}: ".format(
                 _test_name(func),
                 len=max_len+1
-            ), end='', flush=True)
+            ), end='')
+            sys.stdout.flush()
 
             # tests marked as 'skip' are to be skipped
             if getattr(func, 'skip', False):
@@ -153,9 +157,10 @@ class TestCase(object):
                    or self.results[dep].skipped:
                     self.results[name].skipped = True
                     if self.verbosity > 0:
-                        print("[ SKIP: Dependency ]", flush=True)
+                        print("[ SKIP: Dependency ]")
                     else:
-                        print("[ SKIP ]", flush=True)
+                        print("[ SKIP ]")
+                    sys.stdout.flush()
                     break
 
             if self.results[name].skipped:
@@ -184,9 +189,10 @@ class TestCase(object):
                     print("[ {}: {} ]".format(
                         verb,
                         self.results[name].error_message()
-                    ), flush=True)
+                    ))
                 else:
-                    print("[ {} ]".format(verb), flush=True)
+                    print("[ {} ]".format(verb))
+                sys.stdout.flush()
 
         # log summary
         num_errors = 0

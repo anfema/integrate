@@ -4,6 +4,21 @@
 
 The usual testing frameworks you can find for Python are so-called unit-testing-frameworks. As this collides with some goals of integration testing this framework was built.
 
+---------
+Changelog
+---------
+
+1.0.0
+-----
+
+- First release, supports Python >= 3.3
+
+1.1.0
+-----
+
+- Backport to work on Python 2.7
+- If you want to use Python 3 use at least 3.3
+
 ---------------------------------------------------------------------
  What's the difference between integration testing and unit-testing?
 ---------------------------------------------------------------------

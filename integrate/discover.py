@@ -20,6 +20,10 @@ def load_module(module_name, filename):
         loader = SourceFileLoader(module_name, filename)
         module = loader.load_module()
         return module
+    elif sys.version_info >= (2, 7):
+        import imp
+        module = imp.load_source(module_name.split('.')[-1], filename)
+        return module
     else:
         raise Exception("What version of python are you running?")
 
@@ -31,7 +35,7 @@ class TestRunner(object):
         self.dirs = dirs
         self.pattern = pattern
         self.checker = checker
-        super().__init__()
+        super(TestRunner, self).__init__()
 
     def _discover(self):
         "Scan directories for possible candiate files"
