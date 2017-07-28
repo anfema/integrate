@@ -9,12 +9,12 @@ Changelog
 ---------
 
 1.0.0
------
+=====
 
 - First release, supports Python >= 3.3
 
 1.1.0
------
+=====
 
 - Backport to work on Python 2.7
 - If you want to use Python 3 use at least 3.3
@@ -65,7 +65,7 @@ As you should test one thing in an unit-test only, you should only use a single 
 3. Write a test-runner (we assume you put the test case into ``tests/test.py``)::
 
 	#!/usr/bin/env python
-	
+
 	from integrate import TestRunner
 	TestRunner(dirs=["tests"], pattern="*.py").run()
 
