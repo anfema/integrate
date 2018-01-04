@@ -38,7 +38,7 @@ class TestRunner(object):
         super(TestRunner, self).__init__()
 
     def _discover(self):
-        "Scan directories for possible candiate files"
+        "Scan directories for possible candidate files"
         files = []
         for d in self.dirs:
             for dirpath, dirnames, filenames in os.walk(d):
@@ -58,11 +58,15 @@ class TestRunner(object):
             if module:
                 members = inspect.getmembers(module, predicate=inspect.isclass)
                 for name, cls in members:
-                    if issubclass(cls, TestCase) and cls != TestCase:
+                    if issubclass(cls, TestCase):
                         test_cases.append(cls)
             else:
                 print("load failed")
-        return test_cases
+
+        # Filter out all classes that are superclasses of other classes, as the intention is probably not to
+        # run those. This will include the base class TestCase.
+        base_classes = {base for test_case in test_cases for base in test_case.__bases__}
+        return [test_case for test_case in test_cases if test_case not in base_classes]
 
     def run(self, only=None):
         "Run discovered tests, may be filtered with only="
