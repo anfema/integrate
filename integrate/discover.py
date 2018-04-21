@@ -93,6 +93,8 @@ class TestRunner(object):
             skipped
         ))
 
+        return (tests, failed, exfailed, skipped)
+
     def plan(self, only=None):
         files = self._discover()
         test_cases = self._import(files)
