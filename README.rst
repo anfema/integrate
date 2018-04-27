@@ -23,8 +23,8 @@ Changelog
 =====
 
 - Bugfix: Python 2 issue (Re #4)
-- Ignore Test Base classes (Thanks [withrocks](https://github.com/withrocks))
-- Testrunner.run() now returns stats (Thanks [nooploop](https://github.com/nooploop))
+- Ignore Test Base classes (Thanks withrocks: https://github.com/withrocks)
+- Testrunner.run() now returns stats (Thanks nooploop: https://github.com/nooploop)
 
 
 ---------------------------------------------------------------------
