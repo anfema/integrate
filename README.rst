@@ -19,6 +19,14 @@ Changelog
 - Backport to work on Python 2.7
 - If you want to use Python 3 use at least 3.3
 
+1.2.0
+=====
+
+- Bugfix: Python 2 issue (Re #4)
+- Ignore Test Base classes (Thanks [withrocks](https://github.com/withrocks))
+- Testrunner.run() now returns stats (Thanks [nooploop](https://github.com/nooploop))
+
+
 ---------------------------------------------------------------------
  What's the difference between integration testing and unit-testing?
 ---------------------------------------------------------------------
