@@ -147,8 +147,9 @@ class TestCase(object):
 
             # tests marked as 'skip' are to be skipped
             if getattr(func, 'skip', False):
-                print("[ SKIP ]", flush=True)
+                print("[ SKIP ]")
                 self.results[name].skipped = True
+                sys.stdout.flush()
 
             # tests that have a skip_if_failed need to be
             # skipped if any of their deps failed
@@ -180,7 +181,8 @@ class TestCase(object):
                 ), None)
             self.teardown_test()
             if len(self.results[name].errors) == 0:
-                print("[  OK  ]", flush=True)
+                print("[  OK  ]")
+                sys.stdout.flush()
             else:
                 verb = "FAIL"
                 if getattr(func, 'expect_fail', None):
