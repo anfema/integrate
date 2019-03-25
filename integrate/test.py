@@ -116,12 +116,14 @@ class TestCase(object):
 
         return [name for name, func in tests]
 
-    def run(self):
+    def run(self, args=None):
         "Run the tests in this test case"
         self.results = {}
 
+        print("* Test Suite args: {}".format( args ))
+
         print("* Running test suite '{}'".format(self.__class__.__doc__))
-        self.setup_all()
+        self.setup_all(args=args)
 
         # collect tests
         possible_tests = inspect.getmembers(self, predicate=inspect.ismethod)
