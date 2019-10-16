@@ -26,6 +26,10 @@ Changelog
 - Ignore Test Base classes (Thanks withrocks: https://github.com/withrocks)
 - Testrunner.run() now returns stats (Thanks nooploop: https://github.com/nooploop)
 
+1.3.0
+=====
+
+- Add optional ``args=`` to ``run()`` - function (Thanks kensthilaire: https://github.com/kensthilaire)
 
 ---------------------------------------------------------------------
  What's the difference between integration testing and unit-testing?
