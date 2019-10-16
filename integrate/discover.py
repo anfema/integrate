@@ -68,10 +68,12 @@ class TestRunner(object):
         base_classes = {base for test_case in test_cases for base in test_case.__bases__}
         return [test_case for test_case in test_cases if test_case not in base_classes]
 
-    def run(self, only=None):
+    def run(self, args=None, only=None):
         "Run discovered tests, may be filtered with only="
         files = self._discover()
         test_cases = self._import(files)
+
+        print("Discover Test Args: {}".format( args ))
 
         tests = 0
         skipped = 0
@@ -83,7 +85,7 @@ class TestRunner(object):
             num_tests, num_failed, num_exfailed, num_skipped = test(
                 verbosity=self.verbosity,
                 checker=self.checker
-            ).run()
+            ).run(args)
             tests += num_tests
             skipped += num_skipped
             failed += num_failed
