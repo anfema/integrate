@@ -12,7 +12,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 setup(
 	name='integrate',
-	version='1.2.1',
+	version='1.3.0',
 	description='Test framework for integration tests with dependencies',
 	long_description=README,
 	long_description_content_type='text/x-rst',
